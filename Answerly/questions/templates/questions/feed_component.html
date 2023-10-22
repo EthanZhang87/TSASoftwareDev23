@@ -1,0 +1,13 @@
+{% for question in questions %}
+            <div>
+                {% if request.user == question.author %}
+                <a href="{% url 'update-question' question.id %}">Edit Question</a>
+                <a href="{% url 'delete-question' question.id %}">Delete Question</a>
+                {% endif %}
+                <a href="{% url 'profile' question.author.id %}">@{{question.author.username}}</a>
+                <h3><a href="{% url 'question' question.id %}">{{ question.title }}</a></h3>
+                <small>{{question.subject}}</small><br><br>
+                <small>{{ question.created }}</small>
+                <hr>            
+            </div>
+{% endfor %}

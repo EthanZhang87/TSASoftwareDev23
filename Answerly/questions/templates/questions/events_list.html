@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+
+<div class="home-container">
+
+    <div>
+        <h2>Browse Events</h2>
+        <hr>
+
+        <div>
+            <a href="{% url 'list-events' %}?q=newest">Newest</a>
+        </div>
+        <div>
+            <a href="{% url 'list-events' %}?q=oldest">Oldest</a>
+        </div>
+        <div>
+            <a href="{% url 'list-events' %}">All Events</a>
+        </div>
+    </div>
+
+    <div>
+        <form method="GET" action="">
+            {% csrf_token %}
+            <input type="text" name="e" placeholder="Search Events...">
+        </form>
+        <h5>{{event_count}} events avaliable</h5>
+        <a href="{% url 'create-event' %}">Create Event</a>
+        <hr>
+            {% include 'questions/event_feed.html' %}
+    </div>
+
+    <div>
+        <h3>Recent Activity</h3>
+        <hr>
+        {% include 'questions/events_component.html' %}
+    </div>
+
+</div>
+
+{% endblock content %}
